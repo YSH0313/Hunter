@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hunterx"
-version = "0.1.1"
+version = "0.1.2"
 description = "高效异步并发爬虫框架"
 authors = ["袁少航 <ysh17600824539@gmail.com>"]
 license = "LICENSE"
