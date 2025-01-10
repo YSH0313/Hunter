@@ -2,7 +2,7 @@
 # @Author: yuanshaohang
 # @Date: 2025/1/6 16:15
 # @Version: 1.0.0
-# @Description: 'Hunter Item'
+# @Description: 'hunterx Item'
 from dataclasses import dataclass, field
 from typing import Any
 

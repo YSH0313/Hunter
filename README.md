@@ -1,4 +1,4 @@
-<h1 align="center">Hunter</h1>
+<h1 align="center">HunterX</h1>
 <p align="center">
     <a href="https://www.python.org/">
         <img alt="Static Badge" src="https://img.shields.io/badge/build-%3E%3D3.11-brightgreen?logo=python&logoColor=appveyor&logoSize=violet&label=python&labelColor=abcdef&color=blue&cacheSeconds=3600">
@@ -14,7 +14,7 @@
 
 ## 项目简介
 
-`Hunter` 是一款可以帮助你快速开发一个网络爬虫应用的一套异步并发框架，他提供了许多内置方法，
+`HunterX` 是一款可以帮助你快速开发一个网络爬虫应用的一套异步并发框架，他提供了许多内置方法，
 让你的开发代码更加的简洁，爬虫代码更加规范，方便维护，除此以外还可以多线程并发的做一些数据处理的工作，
 更多功能请查看 [官方文档]() 或添加开发者的微信 `YSH026-`。
 
@@ -28,7 +28,7 @@
 
 ### 安装说明
 
-执行以下命令安装hunter
+执行以下命令安装hunterx
 
 ```bash
 pip install hunterx

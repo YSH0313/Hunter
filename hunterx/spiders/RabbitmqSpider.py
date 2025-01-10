@@ -31,7 +31,7 @@ class RabbitmqSpider(ManagerRabbitmq):
         self.__Auto_clear = self._settings.AUTO_CLEAR
 
         self.__Waiting_time = self._settings.WAITTING_TIME
-        print(self.__Waiting_time)
+
         self.__Delay_time = self._settings.DELAY_TIME
 
     def open_spider(self, spider):

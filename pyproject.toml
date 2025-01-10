@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hunterx"
-version = "0.1.0"
+version = "0.1.1"
 description = "高效异步并发爬虫框架"
 authors = ["袁少航 <ysh17600824539@gmail.com>"]
 license = "LICENSE"
@@ -35,7 +35,7 @@ hiredis = "^3.1.0"
 aiomysql = "^0.2.0"
 
 [tool.poetry.scripts]
-hunter = 'hunter.commands.hunter:main'
+hunterx = 'hunterx.commands.hunterx:main'
 
 [build-system]
 requires = ["poetry-core"]

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import hunter
-from hunter.spiders import RabbitmqSpider
+import hunterx
+from hunterx.spiders import RabbitmqSpider
 
 
 class ${Class_name}Spider(RabbitmqSpider):
@@ -13,7 +13,7 @@ class ${Class_name}Spider(RabbitmqSpider):
 
     def start_requests(self):
         url = 'https://www.baidu.com/'
-        yield hunter.Requests(url=url, headers=self.header, callback=self.parse, level=1)
+        yield hunterx.Requests(url=url, headers=self.header, callback=self.parse, level=1)
 
     async def parse(self, response):
         print(response.text)

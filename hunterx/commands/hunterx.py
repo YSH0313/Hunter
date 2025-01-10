@@ -13,7 +13,7 @@ from hunterx.commands.complete_template import CompleteTemplate
 from hunterx.commands.config import green_text, yellow_text, reset_all, custom_style
 
 
-class Hunter(CompleteTemplate):
+class hunterx(CompleteTemplate):
 
     @staticmethod
     def ui():
@@ -59,7 +59,7 @@ class Hunter(CompleteTemplate):
             spider_name = answers.get('spider_name')
             kernel = answers.get('kernel')
 
-            Hunter.info(project_name, spider_name, kernel)
+            hunterx.info(project_name, spider_name, kernel)
         else:
             print(f'{yellow_text}Project creation was aborted.')
 
@@ -69,7 +69,7 @@ class Hunter(CompleteTemplate):
     @click.option('-s', '--spider_name', prompt=True, help='The task name.')
     @click.option('-k', '--kernel', prompt=True, help='The kernel name.')
     def cli(project_name, spider_name, kernel):
-        Hunter.info(project_name, spider_name, kernel)
+        hunterx.info(project_name, spider_name, kernel)
 
     @staticmethod
     def info(project_name, spider_name, kernel):
@@ -79,10 +79,10 @@ class Hunter(CompleteTemplate):
 
         spider_name = spider_name if spider_name else 'first_spider'
 
-        spider_template = Hunter.get_spider_tmpl(kernel)
-        pipelines_template = Hunter.get_pipelines_tmpl()
-        middlewares_template = Hunter.get_middleware_tmpl()
-        items_template = Hunter.get_item_tmpl()
+        spider_template = hunterx.get_spider_tmpl(kernel)
+        pipelines_template = hunterx.get_pipelines_tmpl()
+        middlewares_template = hunterx.get_middleware_tmpl()
+        items_template = hunterx.get_item_tmpl()
 
         template_values = {
             'Class_name': re_name(spider_name),
@@ -94,16 +94,16 @@ class Hunter(CompleteTemplate):
         middlewares_model = middlewares_template.safe_substitute(template_values)
         items_model = items_template.safe_substitute(template_values)
 
-        Hunter.create_project_structure(
+        hunterx.create_project_structure(
             project_name, spider_name, spider_model, pipelines_model, middlewares_model, items_model
         )
 
 
 def main():
     if len(sys.argv) > 1:
-        Hunter.cli()
+        hunterx.cli()
     else:
-        Hunter.ui()
+        hunterx.ui()
 
 
 # 示例：在当前目录下创建项目
