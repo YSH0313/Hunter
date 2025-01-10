@@ -3,8 +3,8 @@
     <a href="https://www.python.org/">
         <img alt="Static Badge" src="https://img.shields.io/badge/build-%3E%3D3.11-brightgreen?logo=python&logoColor=appveyor&logoSize=violet&label=python&labelColor=abcdef&color=blue&cacheSeconds=3600">
     </a>
-    <a href="https://github.com/YSH0313/single_process/LICENSE">
-        <img alt="GitHub License" src="https://img.shields.io/github/license/YSH0313/single_process?logo=appveyor&logoColor=violet&logoSize=auto&label=license&labelColor=abcdef&color=green&cacheSeconds=3600">
+    <a href="https://github.com/YSH0313/Hunter/LICENSE">
+        <img alt="GitHub License" src="https://img.shields.io/github/license/YSH0313/Hunter?logo=appveyor&logoColor=violet&logoSize=auto&label=license&labelColor=abcdef&color=green&cacheSeconds=3600">
     </a>
 </p>
 
