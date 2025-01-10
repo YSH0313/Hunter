@@ -1,75 +1,202 @@
-<h1 align="center">Single-Prcocess</h1>
+<h1 align="center">Hunter</h1>
 <p align="center">
     <a href="https://www.python.org/">
-        <img src="https://img.shields.io/badge/python-%3E%3D3.7.2-blue.svg" alt="python">
-    </a>
-    <a href="https://pypi.org/project/aiohttp/">
-        <img src="https://img.shields.io/badge/aiohttp-%3E%3D3.7.4.post0-blue.svg" alt="python">
+        <img alt="Static Badge" src="https://img.shields.io/badge/build-%3E%3D3.11-brightgreen?logo=python&logoColor=appveyor&logoSize=violet&label=python&labelColor=abcdef&color=blue&cacheSeconds=3600">
     </a>
     <a href="https://github.com/YSH0313/single_process/LICENSE">
-        <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">
+        <img alt="GitHub License" src="https://img.shields.io/github/license/YSH0313/single_process?logo=appveyor&logoColor=violet&logoSize=auto&label=license&labelColor=abcdef&color=green&cacheSeconds=3600">
     </a>
 </p>
 
-# 项目简介
+## 项目背景
 
-single_process是一款可以帮助你快速开发一个网络爬虫应用的一套异步并发框架，他提供了许多内置方法，
+这个项目为作者在工作学习中诞生的，一直以来作为本人的工作利器，经过多年的实战打磨，决定开源出来和大家一起学习进步，项目中也存在诸多可优化迭代的方向，期待和你一起完善。
+
+## 项目简介
+
+`Hunter` 是一款可以帮助你快速开发一个网络爬虫应用的一套异步并发框架，他提供了许多内置方法，
 让你的开发代码更加的简洁，爬虫代码更加规范，方便维护，除此以外还可以多线程并发的做一些数据处理的工作，
-更多功能可以添加开发者的微信（YSH026-）进行沟通。
+更多功能请查看 [官方文档]() 或添加开发者的微信 `YSH026-`。
 
-## 开始使用
+### [官方文档]()
 
-### 前置条件
+## 快速开始
 
-    - python3.7及以上版本
-    - rabbitmq或者redis队列，最新版本新增了基于内存的优先级队列（默认优先使用内存优先级队列）
+### 环境准备
 
-[//]: # (    - 执行my_sh目录下的spiderlist_monitor.sql文件，用来生成爬虫注册表)
+- python3.11及以上版本
 
 ### 安装说明
 
-    - git clone https://github.com/YSH0313/single_process.git
-    - pip install -r requirements.txt
-    - 将settings.py中的各项配置改为自己配置信息
+执行以下命令安装hunter
+
+```bash
+pip install hunter
+```
+
+安装完成后执行以下命令
+
+```bash
+hunter
+```
+
+成功执行后你将看到以下输出，输入和选择你的创建信息
+
+- `ManagerRabbitmq`: 以 `rabbitmq` 作为优先级队列的爬虫任务。
+- `ManagerRedis`: 以 `redis` 作为优先级队列的爬虫任务。
+- `ManagerMemory`: 以 `内存` 作为优先级队列的爬虫任务。
+
+```text
+? You are about to create a new project. Please follow the prompts to fill in the information. Yes
+? 📁Enter the project name for your project: my_project
+? 💡Enter the task name for the project: first_spider
+? ⚙️Please select a kernel: 
+  ManagerRabbitmq
+  ManagerRedis
+❯ ManagerMemory
+```
+
+```text
+? You are about to create a new project. Please follow the prompts to fill in the information. Yes
+? 📁Enter the project name for your project: my_project
+? 💡Enter the task name for the project: first_spider
+? ⚙️Please select a kernel: ManagerMemory
+The project name is: my_project.
+The task name is: first_spider.
+The selected kernel is: ManagerMemory.
+Created file: my_project/generator.py
+Created file: my_project/__init__.py
+Created file: my_project/items.py
+Created file: my_project/middleware.py
+Created file: my_project/pipelines.py
+Created file: my_project/settings.py
+Created file: my_project/spiders/__init__.py
+Created file: my_project/spiders/first_spider.py
+Project structure created at: /your_path/my_project
+```
+
+将创建完成后项目根目录下的 `settings.py` 文件中的各项配置改为自己配置信息
 
 ### 项目结构
 
-    ├── MQ  # Rabbitmq队列管理模块
-    ├── Production_spider.py  # 创建爬虫模板脚本
+```text
+my_project
+    ├── spiders
+    │    ├── __init__.py
+    │    └── first_spider.py
     ├── __init__.py
-    ├── asyncio_config  # 核心引擎及请求类和返回体
-    ├── config  # 基础继承类及爬虫模版
-    ├── get_code  # 验证码训练模块
-    ├── items.py  # item模块用于定义字段
-    ├── library_tool  # 工具类
-    ├── middleware  # 中间件
-    ├── requirements.txt  # 依赖
-    ├── run.py
-    ├── settings.py  # 配置文件
-    └── spider  # 任务目录
-        ├── __init__.py
-        └── first_spider.py  # 具体爬虫文件
+    ├── generator.py
+    ├── items.py
+    ├── middleware.py
+    ├── pipelines.py
+    └── settings.py
+```
 
 ### 测试运行
 
-- 执行spider文件夹下的first_spider.py，如果正常运行并打印出了相应的信息，说明部署成功
+- 使用命令行
+
+```bash
+cd my_project/spiders
+python first_spider.py
+```
+
+- 使用IDE
+
+执行 `spiders` 文件夹下的 `first_spider.py`
 
 ### 创建爬虫
 
-- 1、打开Production_spider.py文件，根据里面的提示填写信息，完成后运行即可创建
+- 打开 `generator.py` 文件，根据里面的提示填写信息，完成后运行即可创建
 
 #### 示例：
 
-- `production("my_first", True, 5, "[开发者]", "第一个爬虫", "your_spider/my_first/", kernel=1)`
-- production具体参数请自行进入源码部分查看，每一项参数都有相应说明，上述示例中【kernel=1】为队列模式选项，默认为3表示优先使用内存作为优先级队列
-- 在spider目录下找到对应的爬虫文件进行相应的代码书写
+```python
+from hunter.utils.generator import production
+
+# spider_dir: 爬虫分层目录名称（路径不存在时会自动创建，无需手动创建目录）
+# spider_name: 创建的爬虫名称
+# kernel_code: 需要使用的核心引擎 默认优先使用内存优先级队列，默认为3(内存队列)，1为rabbitmq队列，2为redis队列
+production(spider_name='second_spider', kernel_code=3)
+```
+
+执行后你将在 `spiders` 目录下看到刚才创建的名为 `second_spider` 的爬虫文件
 
 ### item配置
 
-- 在items.py文件中配置自己爬虫所需要的字段
-- 要符合类似于下面这样的结构，且必须继承SingleItem父类
-- ```
-  class BiddingItem(SingleItem):  # BiddingItem为item名称
-        def __init__(self):
-            sele.name = None  # 这里表示我们有一个name字段预占位
-  ```
+打开 `items.py` 文件，您应该可以看到以下内容
+
+```python
+# -*- coding: utf-8 -*-
+# @Description: 自定义item类
+# Define here the models for your scraped items
+from hunter.items.baseitem import Item, dataclass, field
+
+
+@dataclass
+class MyProjectItem(Item):
+    # name: str = field(default="")
+    pass
+```
+
+那么你可以根据示例 `name: str = field(default="")` 继续创建更多字段，注意要设置好字段类型
+
+接下来你可以在爬虫中这样使用
+
+```python
+# -*- coding: utf-8 -*-
+import hunter
+from hunter.spiders import MemorySpider
+from items import MyProjectItem
+
+
+class FirstSpiderSpider(MemorySpider):
+    name = 'first_spider'
+
+    def __init__(self):
+        self.header = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'
+        }
+
+    def start_requests(self):
+        url = 'https://www.example.com/'
+        yield hunter.Requests(url=url, headers=self.header, callback=self.parse, level=1)
+
+    async def parse(self, response):
+        item = MyProjectItem()
+        item.name = 'hunter'
+        yield item
+
+
+if __name__ == '__main__':
+    start_run = FirstSpiderSpider()
+    start_run.run()
+
+```
+
+这样在执行后设置的字段就可以被正确的赋值了，接下来可以使用管道 `pipelines.py` 中进行下一步的处理
+
+### pipline配置
+
+打开 `pipelines.py` 文件，你应该可以看到以下内容
+
+```python
+from hunter.piplines.basepipeline import Pipeline
+from hunter.test.my_project.items import MyItem
+
+
+class MyProjectPipeline(Pipeline):
+
+    async def process_item(self, item, spider):
+        if isinstance(item, MyItem):
+            print(item)
+            print(spider.name)
+```
+
+在这里可以获取到在 `items.py` 中设置的字段的值，你可以在这里进一步的对数据进行处理，当然这需要爬虫中正确调用并传递。
+
+以上就是一个快速简单的使用案例，更多使用技巧请查看 [官方文档]()
+
+## License
+
+[MIT](/LICENSE)

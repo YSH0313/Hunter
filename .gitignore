@@ -10,3 +10,5 @@
 *.jpg
 *.xml
 .DS_Store
+__pycache__/
+dist/
