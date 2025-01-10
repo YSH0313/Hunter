@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "hunter"
+name = "hunterx"
 version = "0.1.0"
 description = "高效异步并发爬虫框架"
 authors = ["袁少航 <ysh17600824539@gmail.com>"]

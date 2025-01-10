@@ -31,13 +31,13 @@
 执行以下命令安装hunter
 
 ```bash
-pip install hunter
+pip install hunterx
 ```
 
 安装完成后执行以下命令
 
 ```bash
-hunter
+hunterx
 ```
 
 成功执行后你将看到以下输出，输入和选择你的创建信息
@@ -112,7 +112,7 @@ python first_spider.py
 #### 示例：
 
 ```python
-from hunter.utils.generator import production
+from hunterx.utils.generator import production
 
 # spider_dir: 爬虫分层目录名称（路径不存在时会自动创建，无需手动创建目录）
 # spider_name: 创建的爬虫名称
@@ -130,7 +130,7 @@ production(spider_name='second_spider', kernel_code=3)
 # -*- coding: utf-8 -*-
 # @Description: 自定义item类
 # Define here the models for your scraped items
-from hunter.items.baseitem import Item, dataclass, field
+from hunterx.items.baseitem import Item, dataclass, field
 
 
 @dataclass
@@ -145,8 +145,8 @@ class MyProjectItem(Item):
 
 ```python
 # -*- coding: utf-8 -*-
-import hunter
-from hunter.spiders import MemorySpider
+import hunterx
+from hunterx.spiders import MemorySpider
 from items import MyProjectItem
 
 
@@ -160,11 +160,11 @@ class FirstSpiderSpider(MemorySpider):
 
     def start_requests(self):
         url = 'https://www.example.com/'
-        yield hunter.Requests(url=url, headers=self.header, callback=self.parse, level=1)
+        yield hunterx.Requests(url=url, headers=self.header, callback=self.parse, level=1)
 
     async def parse(self, response):
         item = MyProjectItem()
-        item.name = 'hunter'
+        item.name = 'hunterx'
         yield item
 
 
@@ -181,8 +181,8 @@ if __name__ == '__main__':
 打开 `pipelines.py` 文件，你应该可以看到以下内容
 
 ```python
-from hunter.piplines.basepipeline import Pipeline
-from hunter.test.my_project.items import MyItem
+from hunterx.piplines.basepipeline import Pipeline
+from hunterx.test.my_project.items import MyItem
 
 
 class MyProjectPipeline(Pipeline):
