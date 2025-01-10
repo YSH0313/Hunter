@@ -182,7 +182,7 @@ if __name__ == '__main__':
 
 ```python
 from hunterx.piplines.basepipeline import Pipeline
-from hunterx.test.my_project.items import MyProjectItem
+from items import MyProjectItem
 
 
 class MyProjectPipeline(Pipeline):
