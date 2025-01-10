@@ -182,13 +182,13 @@ if __name__ == '__main__':
 
 ```python
 from hunterx.piplines.basepipeline import Pipeline
-from hunterx.test.my_project.items import MyItem
+from hunterx.test.my_project.items import MyProjectItem
 
 
 class MyProjectPipeline(Pipeline):
 
     async def process_item(self, item, spider):
-        if isinstance(item, MyItem):
+        if isinstance(item, MyProjectItem):
             print(item)
             print(spider.name)
 ```
