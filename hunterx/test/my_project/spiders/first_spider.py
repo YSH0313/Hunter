@@ -17,7 +17,7 @@ class FirstSpiderSpider(MemorySpider):
             'MYSQL_PASSWORD': 'password',
             'PORT': 3306
         },
-        'MYSQL_ENABLED': True,
+        'MYSQL_ENABLED': False,
     }
 
     def __init__(self):
@@ -30,6 +30,7 @@ class FirstSpiderSpider(MemorySpider):
         yield hunterx.Requests(url=url, headers=self.header, callback=self.parse, level=1)
 
     async def parse(self, response):
+        print(response.status_code)
         item = MyProjectItem()
         item.name = 'hunterx'
         yield item
