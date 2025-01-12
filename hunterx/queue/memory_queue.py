@@ -25,7 +25,7 @@ class PriorityQueue(Base):
 
     async def push(self, item, priority=0):
         # 序列化任务参数
-        if (isinstance(item, FormRequests)) or (isinstance(item, Requests)) or (isinstance(item, PatchRequests)):
+        if isinstance(item, (FormRequests, Requests, PatchRequests)):
             mess_demo = {}
             fun_name = ''
             for k, v in item.__dict__.items():
