@@ -28,7 +28,7 @@ class RabbitmqSpider(ManagerRabbitmq):
             self.start_urls: list[str] = []
 
         self.__Asynch = self._settings.ASYNC_PORD
-        self.__Auto_clear = self._settings.AUTO_CLEAR
+        self.__QUEUE_AUTO_CLEAR = self._settings.QUEUE_AUTO_CLEAR
 
         self.__Waiting_time = self._settings.WAITTING_TIME
 
@@ -83,7 +83,7 @@ class RabbitmqSpider(ManagerRabbitmq):
         # 通用中间件爬虫启动时的处理逻辑
         await MiddlewareManager(self.middlewares).handle_open(self)
 
-        if self.__Auto_clear:
+        if self.__QUEUE_AUTO_CLEAR:
             await self.declare_priority_queue()
 
         if self.__Asynch:  # 如果是异步生产（一边生产一边消费）
