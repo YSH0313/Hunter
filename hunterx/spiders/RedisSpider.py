@@ -28,7 +28,7 @@ class RedisSpider(ManagerRedis):
             self.start_urls: list[str] = []
 
         self.__Asynch = self._settings.ASYNC_PROD
-        self.__Auto_clear = self._settings.AUTO_CLEAR
+        self.__QUEUE_AUTO_CLEAR = self._settings.QUEUE_AUTO_CLEAR
 
         self.__Waiting_time = self._settings.WAITTING_TIME
         self.__Delay_time = self._settings.DELAY_TIME
@@ -82,27 +82,27 @@ class RedisSpider(ManagerRedis):
         # 通用中间件爬虫启动时的处理逻辑
         await MiddlewareManager(self.middlewares).handle_open(self)
 
-        if self.__Auto_clear:
+        if self.__QUEUE_AUTO_CLEAR:
             await self.declare_priority_queue()
 
-        if self.__Asynch:  # 如果是异步生产（一边生产一边消费）
-            asyncio.create_task(self.make_start_request(start_fun=self.start_requests))
-
-        else:  # 如果不需要异步生产（等生产完之后再开始消费）
-            await asyncio.create_task(self.make_start_request(start_fun=self.start_requests))
-
-        # 通用中间件爬虫启动成功的处理逻辑
-        await MiddlewareManager(self.middlewares).handle_executed(self)
-
-        # 开启监控队列状态
-        # asyncio.run_coroutine_threadsafe(self.shutdown_spider(spider_name=self.name), self.shutdown_loop)
-        monitor_task = asyncio.create_task(self.shutdown_spider(spider_name=self.name))
-
-        # 开启消费者
-        # await asyncio.create_task(self.consumer_redis())
-        consumer_task = asyncio.create_task(self.consumer_redis())
-
-        await asyncio.gather(monitor_task, consumer_task)
+        # if self.__Asynch:  # 如果是异步生产（一边生产一边消费）
+        #     asyncio.create_task(self.make_start_request(start_fun=self.start_requests))
+        #
+        # else:  # 如果不需要异步生产（等生产完之后再开始消费）
+        #     await asyncio.create_task(self.make_start_request(start_fun=self.start_requests))
+        #
+        # # 通用中间件爬虫启动成功的处理逻辑
+        # await MiddlewareManager(self.middlewares).handle_executed(self)
+        #
+        # # 开启监控队列状态
+        # # asyncio.run_coroutine_threadsafe(self.shutdown_spider(spider_name=self.name), self.shutdown_loop)
+        # monitor_task = asyncio.create_task(self.shutdown_spider(spider_name=self.name))
+        #
+        # # 开启消费者
+        # # await asyncio.create_task(self.consumer_redis())
+        # consumer_task = asyncio.create_task(self.consumer_redis())
+        #
+        # await asyncio.gather(monitor_task, consumer_task)
 
     async def shutdown_spider(self, spider_name: str):
         """监控队列及运行状态"""
